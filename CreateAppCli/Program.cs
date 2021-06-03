@@ -5,28 +5,22 @@ namespace create_app
 {
     class Program
     {
-        public class Options
+        class Options
         {
             [Option('v', "verbose", Required = false, HelpText = "Set output to verbose messages.")]
             public bool Verbose { get; set; }
         }
+    
+        [Verb("save", HelpText = "Save a template based on a project")]
+        class SaveOptions {
+            [Option('t', "template", Required = false, HelpText = "Template location")]
+            public string TemplateLocation { get; set; }
+        }
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            Parser.Default.ParseArguments<Options>(args)
-                   .WithParsed<Options>(o =>
-                   {
-                       if (o.Verbose)
-                       {
-                           Console.WriteLine($"Verbose output enabled. Current Arguments: -v {o.Verbose}");
-                           Console.WriteLine("Quick Start Example! App is in Verbose mode!");
-                       }
-                       else
-                       {
-                           Console.WriteLine($"Current Arguments: -v {o.Verbose}");
-                           Console.WriteLine("Quick Start Example!");
-                       }
-                   });
+            return Parser.Default.ParseArguments<Options, SaveOptions>(args)
+                .MapResult((Options opts) => 0, (SaveOptions opts) => 0, errs => 1);
         }
     }
 }
