@@ -1,0 +1,11 @@
+**/bin
+**/obj
+
+#Paket dependency manager
+.paket/
+paket-files/
+packages/
+
+#vscode
+launch.json
+tasks.json

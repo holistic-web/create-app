@@ -1,0 +1,3 @@
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    CommandLineParser (2.8)
